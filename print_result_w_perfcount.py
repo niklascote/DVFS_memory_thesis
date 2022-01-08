@@ -14,13 +14,24 @@ for b in benchmarks:
                     i=0
                     for line in openfile:
                         for part in line.split():
-                            if "INST_RETIRED:ALL" in part:
+                            if "Energy" in part:
                                 print(""+str(frequencies[i])+" Ghz")
                                 i=i+1
                                 print(line,end='')
-                            if "MEM_LOAD_UOPS_RETIRED:L3_MISS" in part:
-                                print(line,end='')
-                            if "UOPS_RETIRED:ALL" in part:
-                                print(line,end='')
-                            if "OFFCORE_RESPONSE_1:L3_HITS" in part:
+                            if "Power" in part:
                                 print(line)
+                            if "cycles" in part:
+                                print(line,end='')
+                            if "instructions" in part:
+                                print(line)
+                            if "RESOURCE_STALLS:SB" in part:
+                                print(line,end='')
+                            if "CYCLE_ACTIVITY:STALLS_L1D_MISS" in part:
+                                print(line,end='')
+                            if "L1D_PEND_MISS:FB_FULL" in part:
+                                print(line,end='')
+                            if "OFFCORE_REQUESTS_BUFFER:SQ_FULL" in part:
+                                print(line,end='')
+                            if "CYCLE_ACTIVITY:STALLS_TOTAL" in part:
+                                print(line)
+                            
