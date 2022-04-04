@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-//#include <pthread.h>
+#include <omp.h>
 
-//#define NUM_THREADS 1
+
+
 int main(int argc, char *argv[]){
-        //pthread_t threads[NUM_THREADS];
         int* ptr;
         time_t t;
         /* Intializes random number generator */
@@ -78,97 +78,116 @@ int main(int argc, char *argv[]){
                         printf("MEMBOUND 50%% \n");
                         break;
                         case 40:
+                        #pragma omp parallel{
+                        unsigned int seed = omp_get_thread_num();
+                        #pragma omp for
                         for(j=0;j<1000;j++){
                                 for (i = 0; i < working_set_size/sizeof(int);i+=128) {
                                         ptr[i+65]=ptr[i];
-                                        tmp1=rand();
+                                        tmp1=rand_r(seed);
                                 }
+                        }
                         }
                         printf("MEMBOUND 40%% \n");
                         break;
                         case 30:
+                        #pragma omp parallel{
+                        unsigned int seed = omp_get_thread_num();
+                        #pragma omp for
                         for(j=0;j<100;j++){
                                 for (i = 0; i < working_set_size/sizeof(int);i+=256) {
                                     ptr[i+65]=ptr[i];
-                                    tmp2=rand();
-                                    tmp3=rand();
-                                    tmp4=rand();
-                                    tmp5=rand();
-                                    tmp6=rand();
-                                    tmp7=rand();
-                                    tmp8=rand();
-                                    tmp9=rand();
-                                    tmp10=rand();
+                                    tmp2=rand_r(seed);
+                                    tmp3=rand_r(seed);
+                                    tmp4=rand_r(seed);
+                                    tmp5=rand_r(seed);
+                                    tmp6=rand_r(seed);
+                                    tmp7=rand_r(seed);
+                                    tmp8=rand_r(seed);
+                                    tmp9=rand_r(seed);
+                                    tmp10=rand_r(seed);
                             }
+                        }
                         }
                         printf("MEMBOUND 20%% \n");
                         break;
 
                         case 20:
+                        #pragma omp parallel{
+                        unsigned int seed = omp_get_thread_num();
+                        #pragma omp for
                         for(j=0;j<100;j++){                                                              
                             for (i = 0; i < working_set_size/sizeof(int);i+=128) {
                                     ptr[i+65]=ptr[i];
-                                    tmp2=rand();
-                                    tmp3=rand();
-                                    tmp4=rand();
-                                    tmp5=rand();
-                                    tmp6=rand();
-                                    tmp7=rand();
+                                    tmp2=rand_r(seed);
+                                    tmp3=rand_r(seed);
+                                    tmp4=rand_r(seed);
+                                    tmp5=rand_r(seed);
+                                    tmp6=rand_r(seed);
+                                    tmp7=rand_r(seed);
                                 }
+                        }
                         }
                         printf("MEMBOUND 20%% \n");
                         break;
                         case 10:
-
+                        #pragma omp parallel{
+                        unsigned int seed = omp_get_thread_num();
+                        #pragma omp for
                         for(j=0;j<100;j++){
                                 for (i = 0; i < working_set_size/sizeof(int);i+=128) {
                                         ptr[i+65]=ptr[i];
-                                        tmp2=rand();
-                                        tmp3=rand();
-                                        tmp4=rand();
-                                        tmp5=rand();
-                                        tmp6=rand();
-                                        tmp7=rand();
-                                        tmp8=rand();
-                                        tmp9=rand();
-                                        tmp10=rand();
-                                        tmp11=rand();
-                                        tmp12=rand();
-                                        tmp13=rand();
-                                        tmp14=rand();
-                                        tmp15=rand();
-                                        tmp16=rand();
-                                        tmp17=rand();
-                                        tmp18=rand();
-                                        tmp19=rand();
-                                        tmp20=rand();
-                                        tmp21=rand();
-                                        tmp22=rand();
+                                        tmp2=rand_r(seed);
+                                        tmp3=rand_r(seed);
+                                        tmp4=rand_r(seed);
+                                        tmp5=rand_r(seed);
+                                        tmp6=rand_r(seed);
+                                        tmp7=rand_r(seed);
+                                        tmp8=rand_r(seed);
+                                        tmp9=rand_r(seed);
+                                        tmp10=rand_r(seed);
+                                        tmp11=rand_r(seed);
+                                        tmp12=rand_r(seed);
+                                        tmp13=rand_r(seed);
+                                        tmp14=rand_r(seed);
+                                        tmp15=rand_r(seed);
+                                        tmp16=rand_r(seed);
+                                        tmp17=rand_r(seed);
+                                        tmp18=rand_r(seed);
+                                        tmp19=rand_r(seed);
+                                        tmp20=rand_r(seed);
+                                        tmp21=rand_r(seed);
+                                        tmp22=rand_r(seed);
                                 }
+                        }
                         }
                         printf("MEMBOUND 10%% \n");
                         break;
 
                         case 0:
+                        #pragma omp parallel{
+                        unsigned int seed = omp_get_thread_num();
+                        #pragma omp for
                         for(j=0;j<1000;j++){                                                                                                         
                             for (i = 0; i < working_set_size/sizeof(int);i+=1024) {
-                                        tmp1=rand();
-                                        tmp2=rand();
-                                        tmp3=rand();
-                                        tmp4=rand();
-                                        tmp5=rand();
-                                        tmp6=rand();
-                                        tmp7=rand();
-                                        tmp8=rand();
-                                        tmp9=rand();
-                                        tmp10=rand();
-                                        tmp11=rand();
-                                        tmp12=rand();
-                                        tmp13=rand();
-                                        tmp14=rand();
-                                        tmp15=rand();
-                                        tmp16=rand();
+                                        tmp1=rand_r(seed);
+                                        tmp2=rand_r(seed);
+                                        tmp3=rand_r(seed);
+                                        tmp4=rand_r(seed);
+                                        tmp5=rand_r(seed);
+                                        tmp6=rand_r(seed);
+                                        tmp7=rand_r(seed);
+                                        tmp8=rand_r(seed);
+                                        tmp9=rand_r(seed);
+                                        tmp10=rand_r(seed);
+                                        tmp11=rand_r(seed);
+                                        tmp12=rand_r(seed);
+                                        tmp13=rand_r(seed);
+                                        tmp14=rand_r(seed);
+                                        tmp15=rand_r(seed);
+                                        tmp16=rand_r(seed);
                                 }
+                        }
                         }
                         printf("MEMBOUND 0%% \n");
                         break;
