@@ -33,6 +33,8 @@ int main(int argc, char *argv[]){
 
                 switch (MEMBOUND){
                         case 70:
+                        #pragma omp parallel{
+                        #pragma omp for
                         for(j=0;j<1000;j++){                                                             
                                 for (i = 0; i < working_set_size/sizeof(int);i+=1024) {
                                         ptr[i+65]=ptr[i];
@@ -52,11 +54,13 @@ int main(int argc, char *argv[]){
                                         ptr[i+961]=ptr[i+896];
                                         ptr[i+1025]=ptr[i+960];
                                 }
-
+                        }
                         }
                         printf("MEMBOUND 70%% \n");
                         break;
                         case 60:
+                        #pragma omp parallel{
+                        #pragma omp for
                         for(j=0;j<1000;j++){
                                 for (i = 0; i < working_set_size/sizeof(int);i+=128) {
                                         ptr[i+65]=ptr[i];
@@ -65,15 +69,19 @@ int main(int argc, char *argv[]){
                                         ptr[i+34]=ptr[i];
                                 }
                         }
+                        }
 
 
                         printf("MEMBOUND 60%% \n");
                         break;
                         case 50:
+                        #pragma omp parallel{
+                        #pragma omp for
                         for(j=0;j<1000;j++){
                                 for (i = 0; i < working_set_size/sizeof(int);i+=64) {                    
                                         ptr[i+64]=ptr[i];
                                 }
+                        }
                         }
                         printf("MEMBOUND 50%% \n");
                         break;
@@ -193,6 +201,8 @@ int main(int argc, char *argv[]){
                         break;
 
                         default:
+                        #pragma omp parallel{
+                        #pragma omp for
                         for(j=0;j<1000;j++){                                                                                                         
                             for (i = 0; i < working_set_size/sizeof(int);i+=1024) {                                                              
                                 ptr[i+65]=ptr[i];                                                                                                    
@@ -212,6 +222,7 @@ int main(int argc, char *argv[]){
                                 ptr[i+961]=ptr[i+896]; 
                                 ptr[i+1025]=ptr[i+960];                                                                                              
                                 }                                                                                                            
+                            }
                             }
                                 printf("No MEMBOUND value choosen, highest MEMBOUND used");
                 }
