@@ -184,27 +184,29 @@ int main(int argc, char *argv[]){
                         #pragma omp for private(i,j,k,tmp2,tmp3,tmp4,tmp5,tmp6,tmp7,tmp8,tmp9,tmp10,tmp11,tmp12,tmp13,tmp14,tmp15,tmp16,tmp17,tmp18,tmp19,tmp20,tmp21,tmp22)
                         for(j=0;j<1000;j++){
                             k = omp_get_thread_num();
-                            for (i = 0; i < working_set_size/sizeof(int);i+=128) {                                        ptr[k][i+65]=ptr[k][i];
-                                    tmp2=rand_r(&seed);
-                                    tmp3=rand_r(&seed);
-                                    tmp4=rand_r(&seed);
-                                    tmp5=rand_r(&seed);
-                                    tmp6=rand_r(&seed);
-                                    tmp7=rand_r(&seed);
-                                    tmp8=rand_r(&seed);
-                                    tmp9=rand_r(&seed);
-                                    tmp10=rand_r(&seed);
-                                    tmp11=rand_r(&seed);                                        tmp12=rand_r(&seed);
-                                    tmp13=rand_r(&seed);
-                                    tmp14=rand_r(&seed);
-                                    tmp15=rand_r(&seed);
-                                    tmp16=rand_r(&seed);
-                                    tmp17=rand_r(&seed);
-                                    tmp18=rand_r(&seed);
-                                    tmp19=rand_r(&seed);
-                                    tmp20=rand_r(&seed);
-                                    tmp21=rand_r(&seed);
-                                    tmp22=rand_r(&seed);
+                            for (i = 0; i < working_set_size/sizeof(int);i+=128) {                                        
+                                ptr[k][i+65]=ptr[k][i];
+                                tmp2=rand_r(&seed);
+                                tmp3=rand_r(&seed);
+                                tmp4=rand_r(&seed);
+                                tmp5=rand_r(&seed);
+                                tmp6=rand_r(&seed);
+                                tmp7=rand_r(&seed);
+                                tmp8=rand_r(&seed);
+                                tmp9=rand_r(&seed);
+                                tmp10=rand_r(&seed);
+                                tmp11=rand_r(&seed);                                        
+                                tmp12=rand_r(&seed);
+                                tmp13=rand_r(&seed);
+                                tmp14=rand_r(&seed);
+                                tmp15=rand_r(&seed);
+                                tmp16=rand_r(&seed);
+                                tmp17=rand_r(&seed);
+                                tmp18=rand_r(&seed);
+                                tmp19=rand_r(&seed);
+                                tmp20=rand_r(&seed);
+                                tmp21=rand_r(&seed);
+                                tmp22=rand_r(&seed);
                             }
                     }
                     }
