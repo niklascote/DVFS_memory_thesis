@@ -272,6 +272,72 @@ int main(int argc, char *argv[]){
                         printf("MEMBOUND 0%% \n");
                         break;
 
+                        case 2:
+                        #pragma omp parallel
+                        {
+                                #pragma omp single
+                                {
+                                        #pragma omp task private(i,j,k)
+                                        {
+                                                for(j=0;j<1000;j++){
+                                                        k = omp_get_thread_num();
+                                                        for (i = 0; i < working_set_size/sizeof(int);i+=1024) {
+                                                                ptr[k][i+65]=ptr[k][i];
+                                                                ptr[k][i+129]=ptr[k][i+64];
+                                                                ptr[k][i+193]=ptr[k][i+128];
+                                                                ptr[k][i+257]=ptr[k][i+192];
+                                                                ptr[k][i+321]=ptr[k][i+256];
+                                                                ptr[k][i+385]=ptr[k][i+320];
+                                                                ptr[k][i+449]=ptr[k][i+384];
+                                                                ptr[k][i+513]=ptr[k][i+448];
+                                                                ptr[k][i+577]=ptr[k][i+512];
+                                                                ptr[k][i+641]=ptr[k][i+576];
+                                                                ptr[k][i+705]=ptr[k][i+640];
+                                                                ptr[k][i+769]=ptr[k][i+704];
+                                                                ptr[k][i+833]=ptr[k][i+768];
+                                                                ptr[k][i+897]=ptr[k][i+832];
+                                                                ptr[k][i+961]=ptr[k][i+896];
+                                                                ptr[k][i+1025]=ptr[k][i+960];
+                                                         }
+                                                 }
+                                                printf("Thread completed membound: %d \n", omp_get_thread_num());
+                                        }
+
+                                        #pragma omp task private(i,j,k,tmp1,tmp2,tmp3,tmp4,tmp5,tmp6,tmp7,tmp8,tmp9,tmp10,tmp11,tmp12,tmp13,tmp14,tmp15,tmp16)
+                                        {
+                                                unsigned int seed = omp_get_thread_num();
+                                                for(j=0;j<1000;j++){
+                                                        k = omp_get_thread_num();
+                                             for (i = 0; i < working_set_size/sizeof(int);i+=1024) {
+                                                                tmp1=rand_r(&seed);
+                                                                tmp2=rand_r(&seed);
+                                                                tmp3=rand_r(&seed);
+                                                                tmp4=rand_r(&seed);
+                                                                tmp5=rand_r(&seed);
+                                                                tmp6=rand_r(&seed);
+                                                                tmp7=rand_r(&seed);
+                                                                tmp8=rand_r(&seed);
+                                                                tmp9=rand_r(&seed);
+                                                                tmp10=rand_r(&seed);
+                                                                tmp11=rand_r(&seed);
+                                                                tmp12=rand_r(&seed);
+                                                                tmp13=rand_r(&seed);
+                                                                tmp14=rand_r(&seed);
+                                                                tmp15=rand_r(&seed);
+                                                                tmp16=rand_r(&seed);
+
+                                                        }
+
+                                                }
+                                                printf("Thread completed computebound :%d \n", omp_get_thread_num());
+                                        #pragma taskwait
+                                        printf("Tasks done by thread: %d \n", omp_get_thread_num());
+                                        }
+                                }
+                        }
+
+                        break;
+
                         default:
                         #pragma omp parallel for private(i,j,k)
                         for(j=0;j<1000;j++){
