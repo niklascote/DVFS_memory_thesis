@@ -16,7 +16,7 @@ for b in benchmarks:
                     for f in frequencies:
                                     command = "scale "+str(f)
                                     os.system(command)
-                                    command = "sudo sh -c \"export OMP_NUM_THREADS="+t+";task_rapl -i -e "+events+" " +b+"> testresult"+str(frequencies.index(f))+".txt\""
+                                    command = "sudo sh -c \"export OMP_NUM_THREADS="+t+";taskset -c "+cores[threads.index(t)]+" task_rapl -i -e "+events+" " +b+"> testresult"+str(frequencies.index(f))+".txt\""
                                     os.system(command)
                     filenames = ['testresult0.txt', 'testresult1.txt','testresult2.txt']
                     with open("results_"+b[8]+b[9]+"_"+t+"Thread", 'w') as outfile:
